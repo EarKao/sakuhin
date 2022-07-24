@@ -8,7 +8,6 @@ public class TitleHandler : MonoBehaviour
 {
 	[SerializeField] Animator whitebackgroundAnimator;
 	[SerializeField] Animator[] buttonAnimator;
-	[SerializeField] TextMeshProUGUI[] tmpText; //Not used
 	private int selectedTextNum = 0;
 
 	[SerializeField] AudioSource titleBGM;
@@ -82,17 +81,4 @@ public class TitleHandler : MonoBehaviour
 			buttonAnimator[0].Play("NotBlinking");
 		}
 	}
-
-	/*private void SetSelectedText()
-	{
-		if (selectedTextNum == 0)
-		{
-			tmpText[0].fontStyle = FontStyles.Underline;
-			tmpText[1].fontStyle = FontStyles.Normal;
-		} else
-		{
-			tmpText[1].fontStyle = FontStyles.Underline;
-			tmpText[0].fontStyle = FontStyles.Normal;
-		}
-	}*/
 }

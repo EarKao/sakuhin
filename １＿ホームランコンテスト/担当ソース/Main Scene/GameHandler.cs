@@ -12,11 +12,8 @@ enum GameState {
 public class GameHandler : MonoBehaviour
 {
 	[SerializeField] TextMeshProUGUI topText;
-	//[SerializeField] Text topText;
-	//[SerializeField] TextMeshProUGUI bottomRText;
 	[SerializeField] Text bottomRText;
 	[SerializeField] TextMeshProUGUI bottomLText;
-	//[SerializeField] Text bottomLText;
 
 	[SerializeField] GameObject PlayerGO;
 
@@ -33,6 +30,7 @@ public class GameHandler : MonoBehaviour
 	[SerializeField] float[] mashingWaitTime;
 	[SerializeField] AudioSource mashingAudio;
 	[SerializeField] Animator buttonAnimator;
+
 	//Mashing: Button
 	int keyNum = -1;
 	char currentKey;
@@ -92,7 +90,6 @@ public class GameHandler : MonoBehaviour
 				finalMashingScore++;
 				buttonAnimator.Play("ButtonPressed");
 				mashingAudio.Play();
-				//SetTopText(finalMashingScore.ToString()); 0119
 			} else
 			if (currentKey == mashingKeys[keyNum] && Input.GetKeyDown(mashingKeysController[keyNum]))
 			{
@@ -100,7 +97,6 @@ public class GameHandler : MonoBehaviour
 				buttonAnimator.Play("ButtonPressed");
 				mashingAudio.Play();
 				Debug.Log(mashingKeysController[keyNum]);
-				//SetTopText(finalMashingScore.ToString()); 0119
 			}
 		}
 
@@ -144,22 +140,6 @@ public class GameHandler : MonoBehaviour
 		buttonAnimator.gameObject.SetActive(false);
 
 		yield return new WaitForSeconds(gameStartTime);        // Initial wait for Load Scene
-		#region Countdown Loop [Commented]
-		/*while (true)
-		{
-			SetTopText(gameStartTime.ToString("0.0") + " READY?");
-			yield return new WaitForSeconds(0.1f);
-			gameStartTime -= 0.1f;
-
-			if (gameStartTime <= 0)
-			{
-				SetTopText("GO!");
-				yield return new WaitForSeconds(0.5f);
-				SetTopText("");
-				break; 
-			}
-		}*/
-		#endregion
 
 		StartCoroutine(StartMashing());
 
@@ -254,7 +234,7 @@ public class GameHandler : MonoBehaviour
 		timingCriticalZoneRT.anchoredPosition = new Vector2(CharacterSelectHandler.selectedCharacter.timingLocation, timingCriticalZoneRT.anchoredPosition.y);
 		timingCriticalZoneRT.sizeDelta = new Vector2(CharacterSelectHandler.selectedCharacter.timingWidth, timingCriticalZoneRT.sizeDelta.y);
 
-		//Setup YellowStone Park jajaja
+		//Setup YellowStone Park
 		YellowZone.anchoredPosition = timingCriticalZoneRT.anchoredPosition;
 		YellowZone.sizeDelta = new Vector2(timingCriticalZoneRT.sizeDelta.x + 100, YellowZone.sizeDelta.y);
 
@@ -271,7 +251,7 @@ public class GameHandler : MonoBehaviour
 			void AddValue(int _value)
 			{
 				if (forward) timingSlider.value += _value; else timingSlider.value -= _value;
-				//SetBottomRText(timingSlider.value.ToString()); 0119
+				
 				if (timingSlider.value >= 100) forward = false; 
 				else if (timingSlider.value <= 0) forward = true;
 			}
@@ -347,11 +327,6 @@ public class GameHandler : MonoBehaviour
 		float finalScore = finalMashingScore + finalTimingScore;
 		Debug.Log("FinalMashingScore: " + finalMashingScore + "   FinalTimingScore: " + finalTimingScore + "   FinalScore: " + finalScore);
 
-		/*SetTopText("最終スコア: " + finalMashingScore.ToString() + " + " + 
-			finalTimingScore.ToString() + " = " + finalScore.ToString()); 0119 */
-
-		//string finalText = "最終スコア: " + finalScore.ToString(); 0119
-
 		yield return new WaitForSeconds(0.5f);
 
 		PlayerGO.transform.position = CharacterSelectHandler.selectedCharacter.gameTransformPos;
@@ -377,9 +352,9 @@ public class GameHandler : MonoBehaviour
 		while (true)
 		{
 			finalDistanceScore = (int)sandbagRB.transform.position.x - sandbadStartingPosX;
-			//SetTopText(finalText + "   " + finalDistanceScore + "m");    // Updates UI for meters traveled
+
 			SetTopText(finalDistanceScore + "km");    // Updates UI for kilometers traveled
-			//SetBottomRText("高度: " + (int)sandbagRB.transform.position.y); 0119
+
 			CheckBackground();
 			if (sandbagRB.velocity.x == 0) break;
 			yield return new WaitForEndOfFrame();

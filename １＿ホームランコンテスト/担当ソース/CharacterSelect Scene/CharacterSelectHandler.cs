@@ -20,11 +20,9 @@ public class CharacterSelectHandler : MonoBehaviour
     [SerializeField] Transform selectionBar;
     private Animator selectionBarAnimator;
 
-    //[SerializeField] TextMeshProUGUI cNameText;
     [SerializeField] Text cNameText;
     [SerializeField] Text cPowerStars;
     [SerializeField] Text cBattingStars;
-    //[SerializeField] TextMeshProUGUI cTechText;
     [SerializeField] Text cTechText;
 
     [SerializeField] float textAnimationSpeed;
@@ -46,8 +44,6 @@ public class CharacterSelectHandler : MonoBehaviour
 		void SetupReference(){
             selectionBarAnimator = selectionBar.GetComponent<Animator>();
         }
-        //characterList.Sort((y, x) => x.battingLevel.CompareTo(y.battingLevel)); ?
-        //foreach (Character c in characterList) Debug.Log(c.battingLevel); ?
     }
 
     private void Update()
@@ -109,27 +105,12 @@ public class CharacterSelectHandler : MonoBehaviour
 
         StopAllCoroutines();
 		StartCoroutine(AnimateText(targetC.characterName, DialogueBox.Name));
-        //cNameText.text = targetCharacter.characterName;
+        
         StartCoroutine(AnimateText(targetC.powerLevel, DialogueBox.PowerStars));
 		StartCoroutine(AnimateText(targetC.battingLevel, DialogueBox.BattingStars));
-		//SetPowerStars();
-		//SetBattingStars();
+		
+
 		StartCoroutine(AnimateText(targetC.techniqueText, DialogueBox.Technique));
-        //cTechText.text = targetC.techniqueText;
-
-        /*
-        void SetPowerStars()
-		{
-            cPowerStars.text = "";
-            for (int i = 0; i < targetC.powerLevel; i++) cPowerStars.text += "š";
-        }
-
-        void SetBattingStars()
-		{
-            cBattingStars.text = "";
-            for (int i = 0; i < targetC.battingLevel; i++) cBattingStars.text += "š";
-        }
-        */
     }
 
 	#region Text Animation

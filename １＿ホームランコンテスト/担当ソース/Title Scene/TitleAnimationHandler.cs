@@ -52,10 +52,8 @@ public class TitleAnimationHandler : MonoBehaviour
         HomerunContestStringGO.SetActive(true);
 
         yield return new WaitForSeconds(1f);
-        //startTextGO.SetActive(true);
         startImage.SetActive(true);
         yield return new WaitForSeconds(0.25f);
-        //rankingTextGO.SetActive(true);
         rankingImage.SetActive(true);
 
         yield return new WaitForSeconds(0.75f);

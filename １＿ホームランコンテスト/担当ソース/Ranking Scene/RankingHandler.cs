@@ -122,34 +122,4 @@ public class RankingHandler : MonoBehaviour
 		}
 		return null;
 	}
-
-	/*
-	#region Editor
-	#if UNITY_EDITOR
-
-	[CustomEditor(typeof(RankingHandler))]
-	public class RankingHandlerEditor : Editor
-	{
-		public override void OnInspectorGUI()
-		{
-			base.OnInspectorGUI();
-
-			RankingHandler rankingHandler = (RankingHandler)target;
-			DrawDetails(rankingHandler);
-
-			bool debugBool = rankingHandler.debug;
-
-			if (debugBool)
-			{
-				rankingHandler.
-			}
-		}
-
-		private void DrawDetails(RankingHandler rh)
-		{
-			
-		}
-	}
-	#endif
-	#endregion*/
 }

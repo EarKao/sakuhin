@@ -29,10 +29,4 @@ public class Character : MonoBehaviour
 
     public Vector3 gameTransformPos;
     public Vector3 gameTransformScale;
-
-	//private void Awake()
-	//{
- //       anchoredPosition = GetComponentsInChildren<RectTransform>()[1].anchoredPosition;
- //       sizeDelta = GetComponentsInChildren<RectTransform>()[1].anchoredPosition;
-	//}
 }
