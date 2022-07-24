@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("プレイヤー基本操作")]
     public float moveSpeed = 8f;
     public bool canMove = true;
-    //TBC//[Range(0.1f, 10f)] public float playerFriction = 1f;
 
     [Header("Basic References")]
     public BoxCollider2D bodyCollider;
@@ -52,8 +51,6 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                //rigidbody2d.velocity = new Vector2(0f, 0f); /* Another method, can try */
-
                 animator.SetBool("isDashing", false);
             }
         }

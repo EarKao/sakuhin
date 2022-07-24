@@ -21,13 +21,13 @@ public class Timer : MonoBehaviour
     private float deltaTime = 1;
     private bool isTimerActive;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         isTimerActive = true;
         countdownTimerUI.text = secondsLeft.ToString();
     }
-    // Update is called once per frame
+    
     void Update()
     {
         TimerCountdown();

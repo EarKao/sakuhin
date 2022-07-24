@@ -4,10 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-/// To Do List
-/// Reference selected characters from last scene into this scene (Using GameObject.Find)
-/// Replace Arrays with List
-
 public enum BattleState { 
     Start, 
     PlayerTurn,
@@ -20,10 +16,6 @@ public enum BattleState {
 public class BattleSystem : MonoBehaviour
 {
     public BattleState battleState;
-
-    //When storing a delegate, it doesn't need parameters, but calling them does
-    //public delegate void Buffs(Character t, List<Character> ts, List<Character> ap);  // Defining the Buff Delegate. Delegate does not remember it's parameters, 
-    //Buffs buff_Effect;                                                                // therefore you need to define them (Below)
 
     #region Buffs References
     List<Character> buffTarget = new List<Character>();    //A single target Character for the buff
@@ -41,7 +33,6 @@ public class BattleSystem : MonoBehaviour
     List<BuffType> buffTypes = new List<BuffType>();   //Buff Types
     int buffCount = 0;   //The Total Number of Buffs
 	#endregion
-	// Make a BuffHandler or Create a buff script that checks everything above. Where adding the buff uses a constructor?
 
 
 
@@ -64,7 +55,6 @@ public class BattleSystem : MonoBehaviour
     private int currentTurn = 1;
 
     public Text dialogueText;
-    //public GameObject selectionCircle;
 
     private void Start()
 	{
@@ -111,21 +101,16 @@ public class BattleSystem : MonoBehaviour
                         if (selectedHit.currentMoves != 0 && selectedSkill == null) // Select a Character if no Skill is selected
                         {
                             selectedPlayerC = selectedHit;
-                            //SetTurnCharacter(selectedPlayerCharacter);
-
-                            //SetSelectionCircle(true);
                             bool isThirdSkillActive = false;
                             if (selectedPlayerC.currentMana == selectedPlayerC.maxMana) isThirdSkillActive = true;
                             ButtonControls(true, true, isThirdSkillActive);
                             SetSkillText(selectedPlayerC);
                             
-                            //Debug.Log("Selected " + selectedHit.name);
                         }
                         else if (selectedSkill != null && selectedSkill.skillType == SkillType.Heal) //Cast a Skill if a Skill is selected and is a Healing Spell
                         {
                             targetedPlayerC = selectedHit;
 
-                            //SetSelectionCircle(false);
                             ButtonControls(false, false, false);
 
                             List<float> skillList = selectedSkill.BuffInfo();
@@ -151,11 +136,10 @@ public class BattleSystem : MonoBehaviour
                         {
                             selectedEnemyC = selectedHit;
 
-                            //SetSelectionCircle(false);
                             ButtonControls(false, false, false);
 
                             List<float> skillList = selectedSkill.BuffInfo();
-                            //Debug.Log(skillList[0] + " " +  skillList[1] + " " + skillList[2] + " " + skillList[3] + " " + skillList[4]);
+
                             selectedSkill.CastSkill(selectedEnemyC, currentEnemyC, playerC);
                             if (selectedSkill.hasBuff) 
                                 StartCoroutine(AddBuff(skillList, selectedSkill.buff_IsAll, selectedSkill.buff_IsEnemy, 
@@ -812,17 +796,14 @@ public class BattleSystem : MonoBehaviour
                     currentEnemyC = Wave2EnemyC;
                     Wave2EnemyC[0].transform.parent.gameObject.SetActive(true);
                     Wave2EnemyC[0].transform.parent.GetComponent<Transform>().position = new Vector3(0, 0, 0);
-                    //Debug.Log(Wave2EnemyCharacters[0].transform.parent.GetComponent<Transform>().name);
                     StartCoroutine(PlayerTurn());
                     battleState = BattleState.PlayerTurn;
-                    //Wave2EnemyCharacters[0].transform.parent.gameObject.SetActive(true);
                     break;
                 case 2:
                     currentWaveNum++;
                     currentEnemyC = Wave3EnemyC;
                     Wave3EnemyC[0].transform.parent.gameObject.SetActive(true);
                     Wave3EnemyC[0].transform.parent.GetComponent<Transform>().position = new Vector3(0, 0, 0);
-                    //Debug.Log(Wave3EnemyCharacters[0].transform.parent.GetComponent<Transform>().name);
                     StartCoroutine(PlayerTurn());
                     battleState = BattleState.PlayerTurn;
                     break;
@@ -869,14 +850,12 @@ public class BattleSystem : MonoBehaviour
         foreach (Character c in playerC.ToArray()) {
             if(c.IsDead()) {
                 c.gameObject.SetActive(false);
-                //c.hpSlider.gameObject.SetActive(false);   // Gets parent Gameobject and disables it
             }
             playerC.RemoveAll(c => c.IsDead());
         }
         foreach (Character c in currentEnemyC.ToArray()) {
             if(c.IsDead()) {
                 c.gameObject.SetActive(false);
-                //c.hpSlider.gameObject.SetActive(false);   // Gets parent Gameobject and disables it
             }
             currentEnemyC.RemoveAll(c => c.IsDead());
         }

@@ -15,7 +15,6 @@ public class PlayerState : MonoBehaviour
 
     private State p_state;
 
-    // Start is called before the first frame update
     void Awake()
     {
         p_state = State.Normal;

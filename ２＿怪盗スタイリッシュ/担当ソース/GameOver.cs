@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;　　　//ボタンを使用するのでUI
-using UnityEngine.SceneManagement;//SceneManagerを使用ためSceneManagementを追加
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {

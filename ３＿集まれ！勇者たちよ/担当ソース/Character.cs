@@ -34,10 +34,6 @@ public class Character : MonoBehaviour
 
     public bool IsDead()
 	{
-        // Use these(below) so it can be called anytime
-        // gameobject.SetActive(false);
-        // hpBar.gameobjects.Setactive(False)
-        // Remember to remove from List in BattleSystem
         if (currentHP <= 0)
         {return true;} else {return false;}
 	}

@@ -91,12 +91,10 @@ public class Skill : MonoBehaviour
 							c.currentHP -= Random.Range(finalDamageAmount * 0.95f, finalDamageAmount *1.05f);
 							UpdateTargetSliders(c);
 						}
-						Debug.Log(m_character.name + " dealt " + finalDamageAmount + " to all enemies"); // Delete later
 					} else
 					{
 						_target.currentHP -= Random.Range(finalDamageAmount * 0.95f, finalDamageAmount * 1.05f); ;
 						UpdateTargetSliders(_target);
-						Debug.Log(m_character.name + " dealt " + finalDamageAmount + " to " + _target); // Delete later
 					}
 					break;
 				}
@@ -115,7 +113,6 @@ public class Skill : MonoBehaviour
 							c.currentHP += finalHealingAmount;
 							UpdateTargetSliders(c);
 						}
-						Debug.Log(m_character.name + " healed " + finalHealingAmount + " to all friendlies"); // Delete later
 					} else
 					{
 						if (_target.currentHP + finalHealingAmount >= _target.maxHp)
@@ -124,7 +121,6 @@ public class Skill : MonoBehaviour
 						}
 						_target.currentHP += finalHealingAmount;
 						UpdateTargetSliders(_target);
-						Debug.Log(m_character.name + " healed " + finalHealingAmount + " to " + _target.name); // Delete later
 					}
 					break;
 				}

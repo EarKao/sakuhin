@@ -10,7 +10,6 @@ public class TitleButtons : MonoBehaviour
     [SerializeField] Button TutorialButton;
     [SerializeField] Button QuitButton;
 
-    // Start is called before the first frame update
 
     public void ClickedStart()
 	{
@@ -41,7 +40,4 @@ public class TitleButtons : MonoBehaviour
 	{
 		Application.Quit();
 	}
-
-
-
 }

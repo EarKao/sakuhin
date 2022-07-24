@@ -42,7 +42,6 @@ public class Enemy : MonoBehaviour
             
             if (hit) { EnemyDirection *= -1; }
             if (EnemyDirection == -1) { spriteRenderer.flipX = false; } else { spriteRenderer.flipX = true; }
-            //Debug.DrawRay(transform.position, new Vector2(EnemyDirection, 0), Color.red);
             transform.position += Vector3.right * EnemyDirection * speed * Time.deltaTime;
         }
 	}

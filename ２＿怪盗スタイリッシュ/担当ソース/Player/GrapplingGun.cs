@@ -84,7 +84,6 @@ public class GrapplingGun : MonoBehaviour
         {
             grappleRope.enabled = false;
             m_springJoint2D.enabled = false;
-            //m_rigidbody.gravityScale = 1;
         } else
         {
             Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
