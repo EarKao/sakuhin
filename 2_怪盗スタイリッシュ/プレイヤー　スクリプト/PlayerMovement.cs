@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//プレイヤーの動き
 public class PlayerMovement : MonoBehaviour
 {
     [Header("プレイヤー基本操作")]

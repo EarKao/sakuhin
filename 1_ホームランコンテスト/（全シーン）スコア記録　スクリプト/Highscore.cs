@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ï€ë∂Ç∑ÇÈÉfÅ[É^
 [System.Serializable]
 public class Highscore
 {

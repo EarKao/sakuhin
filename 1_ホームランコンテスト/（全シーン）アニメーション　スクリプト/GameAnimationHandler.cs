@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//メインシーン　アニメーション
 public class GameAnimationHandler : MonoBehaviour
 {
     public GameObject whiteScreenGO;

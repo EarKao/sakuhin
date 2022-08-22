@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//ƒvƒŒƒCƒ„[ó‘Ô
 public class PlayerState : MonoBehaviour
 {
     [SerializeField] float invincibleTime = 2f;

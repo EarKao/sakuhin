@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//プレイヤースライディング
 public class PlayerSlide : MonoBehaviour
 {
 	[HideInInspector] public bool isSliding = false;

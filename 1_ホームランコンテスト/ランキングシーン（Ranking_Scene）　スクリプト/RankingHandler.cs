@@ -5,10 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
+//ランキングシーン
 public class RankingHandler : MonoBehaviour
 {
 	[SerializeField] float scrollerSpeed;
@@ -38,11 +35,11 @@ public class RankingHandler : MonoBehaviour
 		{
 			entry.gameObject.SetActive(false);
 
-			if (highscoreList != null && !debugMode)  // Reads highscore from Save File
+			if (highscoreList != null && !debugMode)  //ハイスコアを読み取る
 			{
 				entryContainerRT.sizeDelta = new Vector2(highscoreList.Count * templateHeight, entryContainerRT.sizeDelta.y);
 				
-				highscoreList.Sort((s1, s2) => s2.distance.CompareTo(s1.distance)); // Sort List by distance
+				highscoreList.Sort((s1, s2) => s2.distance.CompareTo(s1.distance)); //リストをソートする（距離）
 
 				for (int i = 0; i < highscoreList.Count; i++)
 				{
@@ -63,7 +60,7 @@ public class RankingHandler : MonoBehaviour
 					entry.gameObject.SetActive(true);
 				}
 			}
-			if (debugMode)    // For Debugging
+			if (debugMode)　//デバッグモード
 			{
 				entryContainerRT.sizeDelta = new Vector2(debugScrollerLength * templateHeight, entryContainerRT.sizeDelta.y);
 
@@ -104,6 +101,7 @@ public class RankingHandler : MonoBehaviour
 		if (Input.GetKey(KeyCode.Return) || Input.GetKeyDown(KeyCode.Joystick1Button2)) StartCoroutine(LoadTitleScene());
 	}
 
+	//TitleSceneをロード
 	IEnumerator LoadTitleScene()
 	{
 		whiteScreenAnimator.Play("Whiteground_Exit");
@@ -111,7 +109,7 @@ public class RankingHandler : MonoBehaviour
 		SceneManager.LoadScene("Title_Scene");
 	}
 
-	private Sprite CharacterSpriteFinder(int _characterID)	// There must be an easier way to do this :^(
+	private Sprite CharacterSpriteFinder(int _characterID)
 	{
 		for (int i = 0; i < characterIdImages.Length; i++)
 		{

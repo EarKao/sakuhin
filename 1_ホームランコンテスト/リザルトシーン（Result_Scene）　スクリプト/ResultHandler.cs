@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+//リザルトシーン
 public class ResultHandler : MonoBehaviour
 {
 	[SerializeField] Image characterImage;
@@ -52,7 +53,7 @@ public class ResultHandler : MonoBehaviour
 		}
 	}
 
-
+	//リザルト処理
 	IEnumerator StartResults()
 	{
 		SetResultTexts(false, "", "");

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//カメラコントローラー
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform target;
@@ -18,6 +19,6 @@ public class CameraController : MonoBehaviour
     {
         Vector3 camPos = m_camera.transform.position;
         var pos = Vector2.Lerp(camPos, target.position, lerpRate);
-        m_camera.transform.position = new Vector3(pos.x, pos.y, camPos.z);// Lerps X and Y but not Z
+        m_camera.transform.position = new Vector3(pos.x, pos.y, camPos.z);// XとYをLerpする
     }
 }

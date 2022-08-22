@@ -7,32 +7,33 @@ public static class SaveSystem
 {
 	public static void SaveData (Highscore highscore)
 	{
-		string path = Directory.GetCurrentDirectory() + "/ranking.sav";	// Location of the Save
+		string path = Directory.GetCurrentDirectory() + "/ranking.sav";	// セーブ位置　Location of the Save
 		BinaryFormatter formatter = new BinaryFormatter();		
 
 		
 
 		List<Highscore> ls = LoadScore();
-		if (ls == null)		// If no Save File is Detected
+		if (ls == null)     // セーブなしの場合　If no Save File is Detected
 		{
-			List<Highscore> newHsList = new List<Highscore>();	// Create a new List<Highscore>
-			newHsList.Add(highscore);	// Add new highscore to List
+			List<Highscore> newHsList = new List<Highscore>();	// List<Highscore>を作る　Create a new List<Highscore>
+			newHsList.Add(highscore);	// ハイスコアを追加する　Add new highscore to List
 
-			FileStream stream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);	// Save a new File
+			FileStream stream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);	// セーブする　Save a new File
 			Debug.Log("Saving to New Save File");
 			formatter.Serialize(stream, newHsList);
 			stream.Close();
-		} else	// If a Save File is Detected
+		} else	// セーブデータありの場合　If a Save File is Detected
 		{
-			List<Highscore> hsList = LoadScore();	// Load the Save File
-			hsList.Add(highscore);  // Add new highscore to Save File list
-			FileStream stream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);	// Overwrite Save File
+			List<Highscore> hsList = LoadScore();	// セーブをロードする　Load the Save File
+			hsList.Add(highscore);  // ハイスコアを追加する　Add new highscore to Save File list
+			FileStream stream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);	// 上書き　Overwrite Save File
 			Debug.Log("Overwriting to Save File");
 			formatter.Serialize(stream, hsList);
 			stream.Close();
 		}
 	}
-
+	
+	// ハイスコアをロードする
 	public static List<Highscore> LoadScore()
 	{
 		string path = Directory.GetCurrentDirectory() + "/ranking.sav";

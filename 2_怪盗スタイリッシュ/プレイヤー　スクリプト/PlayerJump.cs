@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//プレイヤージャンプ
 public class PlayerJump : MonoBehaviour
 {
     [HideInInspector] public bool isJumping = false;

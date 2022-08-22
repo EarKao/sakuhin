@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+//メインシーンハンドラー
 public class MainHandler : MonoBehaviour
 {
 	[Header("Main Menu")]

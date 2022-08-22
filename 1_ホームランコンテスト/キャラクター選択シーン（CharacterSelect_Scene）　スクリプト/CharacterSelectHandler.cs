@@ -10,6 +10,7 @@ enum DialogueBox
     Name, PowerStars, BattingStars, Technique
 }
 
+//キャラクター選択シーン
 public class CharacterSelectHandler : MonoBehaviour
 {
     public List<Character> characterList = new List<Character>();    // Static Variable
@@ -20,26 +21,29 @@ public class CharacterSelectHandler : MonoBehaviour
     [SerializeField] Transform selectionBar;
     private Animator selectionBarAnimator;
 
+    //キャラクターのテキスト
     [SerializeField] Text cNameText;
     [SerializeField] Text cPowerStars;
     [SerializeField] Text cBattingStars;
     [SerializeField] Text cTechText;
 
+    //アニメーションの速度
     [SerializeField] float textAnimationSpeed;
     [SerializeField] float starsAnimationSpeed;
 
+    //BGMとサウンド
     [SerializeField] AudioSource characterSelectBGM;
     [SerializeField] AudioSource onSelectionChangeSE;
     [SerializeField] AudioSource onSelectionChooseSE;
 
-    public static Character selectedCharacter; //Static Variable
-    private int selectedCharacterNum = 4;
-    private bool isSelectable = true;
+    public static Character selectedCharacter; //プレイヤー選択したキャラ　（スタティック変数）
+    private int selectedCharacterNum = 4; //開始位置
+    private bool isSelectable = true; //選択できるかのbool
 
     private void Start()
     {
         SetupReference();
-        SetCharacter(characterList[selectedCharacterNum]); //Sets Default Character to the First Character
+        SetCharacter(characterList[selectedCharacterNum]); //開始キャラを設定する
 
 		void SetupReference(){
             selectionBarAnimator = selectionBar.GetComponent<Animator>();
@@ -71,6 +75,7 @@ public class CharacterSelectHandler : MonoBehaviour
         }
     }
 
+    //MainSceneをロード
     IEnumerator LoadMainScene()
     {
         selectionBarAnimator.Play("SelectionImage_Selected");
@@ -92,6 +97,7 @@ public class CharacterSelectHandler : MonoBehaviour
         }
     }
 
+    //キャラ選択
     private void SetCharacter(Character targetC)
     {
         selectionBar.position = targetC.transform.position;
@@ -113,8 +119,9 @@ public class CharacterSelectHandler : MonoBehaviour
 		StartCoroutine(AnimateText(targetC.techniqueText, DialogueBox.Technique));
     }
 
+    //テキストアニメーション
 	#region Text Animation
-	IEnumerator AnimateText(string _text, DialogueBox _dialogueBox) //Text Dialogue Box Only
+	IEnumerator AnimateText(string _text, DialogueBox _dialogueBox) //テキスト　用
     {
         switch (_dialogueBox)
         {
@@ -138,7 +145,7 @@ public class CharacterSelectHandler : MonoBehaviour
         }
     }
 
-    IEnumerator AnimateText(int _num, DialogueBox _dialogueBox) //Stars Dialogue Box Only
+    IEnumerator AnimateText(int _num, DialogueBox _dialogueBox) //ほし★　用
     {
         switch (_dialogueBox)
         {

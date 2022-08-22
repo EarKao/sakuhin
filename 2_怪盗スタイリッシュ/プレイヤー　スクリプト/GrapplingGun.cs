@@ -109,7 +109,7 @@ public class GrapplingGun : MonoBehaviour
         Vector2 distanceVector = m_camera.ScreenToWorldPoint(Input.mousePosition) - gunPivot.position;
         if (Physics2D.Raycast(firePoint.position, distanceVector.normalized))
         {
-            // Ratcast a target, if target is true, cast a rope
+            // Raycast a target, if target is true, cast a rope
             RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized);
             if (_hit.transform.gameObject.layer == grappableLayerNumber || grappleToAll)
             {

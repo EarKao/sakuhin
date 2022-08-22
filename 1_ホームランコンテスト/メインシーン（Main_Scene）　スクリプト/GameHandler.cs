@@ -5,10 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+//ゲーム状態
 enum GameState {
     Start, Mashing, Timing, End
 }
 
+//メインシーン
 public class GameHandler : MonoBehaviour
 {
 	[SerializeField] TextMeshProUGUI topText;
@@ -21,9 +23,11 @@ public class GameHandler : MonoBehaviour
 	[SerializeField] float sandbagMass;
 	private int sandbadStartingPosX;
 
+	//スタートフェース
 	[Header("[ Start Game ]")]
 	[SerializeField] float gameStartTime;
 
+	//連打フェース
 	[Header("[ Mashing ]")]
 	[SerializeField] char[] mashingKeys;
 	[SerializeField] List<KeyCode> mashingKeysController = new List<KeyCode>(); // WASD △□XO 3012
@@ -31,11 +35,12 @@ public class GameHandler : MonoBehaviour
 	[SerializeField] AudioSource mashingAudio;
 	[SerializeField] Animator buttonAnimator;
 
-	//Mashing: Button
+	////連打: ボタン
 	int keyNum = -1;
 	char currentKey;
 	int finalMashingScore;
 
+	//タイミングフェース
 	[Header("[ Timing ]")]
 	[SerializeField] Slider timingSlider; //For Reference Only
 	[SerializeField] RectTransform timingCriticalZoneRT;
@@ -47,6 +52,7 @@ public class GameHandler : MonoBehaviour
 	bool inSliderLoop = true;
 	int finalTimingScore;
 
+	//エンディングフェース
 	[Header("[ End Game ]")]
 	[SerializeField] float speedupMul;
 	[SerializeField] AudioSource sandbagFlyAudio;
@@ -67,6 +73,7 @@ public class GameHandler : MonoBehaviour
 
 		void Setup()
 		{
+			//選択したキャラクタースプライト、位置、スケール設定
 			PlayerGO.GetComponent<SpriteRenderer>().sprite = CharacterSelectHandler.selectedCharacter.m_sprite;
 			PlayerGO.transform.position = CharacterSelectHandler.selectedCharacter.gameTransformPos;
 			PlayerGO.transform.localScale = CharacterSelectHandler.selectedCharacter.gameTransformScale;
@@ -81,6 +88,8 @@ public class GameHandler : MonoBehaviour
 			gAH = GetComponentInChildren<GameAnimationHandler>();
 		}
 	}
+
+	//ゲームフェースによって別の機能をUpdateする
 	private void Update()
 	{
 		if (gameState == GameState.Mashing)
@@ -130,6 +139,7 @@ public class GameHandler : MonoBehaviour
 	}
 
 	#region Game Phases
+	//スタートフェース
 	IEnumerator StartGame()
 	{
 		SetTopText("");
@@ -146,6 +156,7 @@ public class GameHandler : MonoBehaviour
 		gameState = GameState.Mashing;
 	}
 
+	//連打フェース
 	IEnumerator StartMashing()
 	{
 		buttonAnimator.gameObject.SetActive(true);
@@ -225,6 +236,7 @@ public class GameHandler : MonoBehaviour
 		gameState = GameState.Timing;
 	}
 
+	//タイミングフェース
 	IEnumerator StartTiming()
 	{
 		yield return new WaitForSeconds(0.5f);
@@ -320,6 +332,7 @@ public class GameHandler : MonoBehaviour
 		}
 	}
 
+	//エンディングフェース
 	IEnumerator EndGame()
 	{
 		yield return new WaitForSeconds(0.5f);

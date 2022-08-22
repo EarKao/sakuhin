@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//キャラクターステータス
 public class Character : MonoBehaviour
 {
     public Sprite m_sprite;

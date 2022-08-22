@@ -39,14 +39,14 @@ public class BattleSystem : MonoBehaviour
 	public List<Character> playerC;
     public List<Character> currentEnemyC;
         
-    public List<Character> Wave1EnemyC; //Reference Wave 1 2 3 GO instead
+    public List<Character> Wave1EnemyC;
     public List<Character> Wave2EnemyC;
     public List<Character> Wave3EnemyC;
 
-    private Character selectedPlayerC = null;   // The player character the Player selected
-    private Character selectedEnemyC = null;    // The enemy character the Player selected
+    private Character selectedPlayerC = null;   // プレイヤー選択したプレイヤーキャラ　The player character the Player selected
+    private Character selectedEnemyC = null;    // プレイヤー選択した敵キャラ　The enemy character the Player selected
     private Skill selectedSkill = null;
-    private Character targetedPlayerC = null;   // The player character the Player targeted
+    private Character targetedPlayerC = null;   // プレイヤーターゲットしたキャラ　The player character the Player targeted
 
     public List<Button> SkillButton;
     public List<Text> SkillButtonText;
@@ -61,7 +61,7 @@ public class BattleSystem : MonoBehaviour
         battleState = BattleState.Start;
         SetupBattle();
 
-        StartCoroutine(GetMouseClickCharacter()); // Starts a neverending code, that checks once every frame (60fps)
+        StartCoroutine(GetMouseClickCharacter()); // 毎フレームをチェックする　Starts a neverending code, that checks once every frame (60fps)
 
 	    void SetupBattle()
 	    {
@@ -91,14 +91,14 @@ public class BattleSystem : MonoBehaviour
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
-            RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero); // Casts a ray from the mouse to the screen
+            RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero); // 画面からゲームへRaycast　Casts a ray from the mouse to the screen
                 if (hit)
                 {
-                    Character selectedHit = hit.collider.GetComponent<Character>(); // Return SelectedHit here. Everything belows goes to another method
+                    Character selectedHit = hit.collider.GetComponent<Character>();
 
                     if (selectedHit.tag == "Player")
                     {
-                        if (selectedHit.currentMoves != 0 && selectedSkill == null) // Select a Character if no Skill is selected
+                        if (selectedHit.currentMoves != 0 && selectedSkill == null) // スキル選択してない場合はキャラを選択　Select a Character if no Skill is selected
                         {
                             selectedPlayerC = selectedHit;
                             bool isThirdSkillActive = false;
@@ -107,7 +107,7 @@ public class BattleSystem : MonoBehaviour
                             SetSkillText(selectedPlayerC);
                             
                         }
-                        else if (selectedSkill != null && selectedSkill.skillType == SkillType.Heal) //Cast a Skill if a Skill is selected and is a Healing Spell
+                        else if (selectedSkill != null && selectedSkill.skillType == SkillType.Heal) // スキル選択している場合はスキルを使用　　Cast a Skill if a Skill is selected and is a Healing Spell
                         {
                             targetedPlayerC = selectedHit;
 
@@ -132,7 +132,7 @@ public class BattleSystem : MonoBehaviour
                     else if (selectedHit.tag == "Enemy")
                     {
                         //Does nothing if no Skill is selected
-                        if (selectedSkill != null && selectedSkill.skillType != SkillType.Heal) //Cast a Skill if a Skill is selected and it's not a Healing Spell
+                        if (selectedSkill != null && selectedSkill.skillType != SkillType.Heal) // ヒーリング以外のスキルならスキルを使う　Cast a Skill if a Skill is selected and it's not a Healing Spell
                         {
                             selectedEnemyC = selectedHit;
 
@@ -166,7 +166,6 @@ public class BattleSystem : MonoBehaviour
         foreach(Character playerCharacter in playerC.ToArray())
 		{
             playerCharacter.currentMoves = playerCharacter.maxMoves;
-            // Grey out Skill Depleted Player Characters
         }
 
         yield return new WaitForSeconds(0f);
@@ -198,23 +197,24 @@ public class BattleSystem : MonoBehaviour
 		}
 	}
 
+    //バフシステム
     IEnumerator AddBuff(List<float> _listBI, bool _isAll, bool _isEnemy, BuffType _buffType, Character _tar, List<Character> _hosL, List<Character> _allL)
 	{
-        buffTurnBuffed.Add(currentTurn); //Set the turn the target(s) is buffed
+        buffTurnBuffed.Add(currentTurn); // バフされたターン　Set the turn the target(s) is buffed
 
-        buffTurns.Add((int)_listBI[0]); //Set how long the buff should last
-        buffAmount.Add((int)_listBI[1]); // + amount
-        buffMultiplier.Add(_listBI[2]); // * amount
-        buffAnimationLength.Add(_listBI[3]); //Set the length for Animation
-        buffStatPower.Add(_listBI[4]); // The stat used (AttackPower, DefensePower etc.)
-        buffIsAll.Add(_isAll); //Is the buff towards all targets?
-        buffIsEnemy.Add(_isEnemy); //Is the buff towards enemies?
+        buffTurns.Add((int)_listBI[0]); // 続くターン数　Set how long the buff should last
+        buffAmount.Add((int)_listBI[1]); // 量　+ amount
+        buffMultiplier.Add(_listBI[2]); // 倍率　* amount
+        buffAnimationLength.Add(_listBI[3]); // アニメーション時間　Set the length for Animation
+        buffStatPower.Add(_listBI[4]); // 当時のステータス　The stat used (AttackPower, DefensePower etc.)
+        buffIsAll.Add(_isAll); // 全体や単体か　Is the buff towards all targets?
+        buffIsEnemy.Add(_isEnemy); // 敵向きか　Is the buff towards enemies?
 
-		buffTypes.Add(_buffType); //Set the Buff Type (Health, Attack, Defense)
+		buffTypes.Add(_buffType); // バフタイプ　Set the Buff Type (Health, Attack, Defense)
 
-		buffTarget.Add(_tar); //Set the target for the buff
-        buffHostileList.Add(_hosL); //Hostile Party, relative to the attacker
-        buffAlliesList.Add(_allL); //Ally Party, relative to the attacker
+		buffTarget.Add(_tar); // ターゲット　Set the target for the buff
+        buffHostileList.Add(_hosL); // 敵パーティー　Hostile Party, relative to the attacker
+        buffAlliesList.Add(_allL); // 友パーティー　Ally Party, relative to the attacker
 
         #region Debug.Logs
         //Debug.Log("buffTurnBuffed: " + buffTurnBuffed[0]);
@@ -437,6 +437,7 @@ public class BattleSystem : MonoBehaviour
         buffCount++; //Increase the total buffCount by 1
     }
 
+    //　バフを実行
     IEnumerator ExecuteBuffs() //Called at the end of the Player's Turn
 	{
         yield return new WaitForSeconds(1f);

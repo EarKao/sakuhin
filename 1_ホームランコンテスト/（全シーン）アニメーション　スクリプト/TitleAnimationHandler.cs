@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//タイトルシーン　アニメーション
 public class TitleAnimationHandler : MonoBehaviour
 {
     [SerializeField] GameObject whiteScreenGO;

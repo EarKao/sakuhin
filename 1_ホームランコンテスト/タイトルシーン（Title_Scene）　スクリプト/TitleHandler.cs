@@ -4,6 +4,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+//タイトルシーン
 public class TitleHandler : MonoBehaviour
 {
 	[SerializeField] Animator whitebackgroundAnimator;
@@ -40,12 +41,13 @@ public class TitleHandler : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Joystick1Button2))
 		{
 			onSelectionEnterSE.Play();
-			if (selectedTextNum == 0) StartCoroutine(LoadMainScene());
+			if (selectedTextNum == 0) StartCoroutine(LoadCharacterScene());
 			if (selectedTextNum == 1) StartCoroutine(LoadRankingScene());
 		}
 	}
 
-	IEnumerator LoadMainScene()
+	//キャラクター選択シーンをロード
+	IEnumerator LoadCharacterScene()
 	{
 		whitebackgroundAnimator.Play("Whiteground_Exit");
 		StartCoroutine(LowerMusic());
@@ -62,6 +64,7 @@ public class TitleHandler : MonoBehaviour
 		}
 	}
 
+	//ランキングシーンをロード
 	IEnumerator LoadRankingScene()
 	{
 		whitebackgroundAnimator.Play("Whiteground_Exit");
@@ -69,6 +72,7 @@ public class TitleHandler : MonoBehaviour
 		SceneManager.LoadScene("Ranking_Scene");
 	}
 
+	//ボタンアニメーション設定
 	public void SetButtonAnimation()
 	{
 		if (selectedTextNum == 0)
